@@ -67,12 +67,12 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
 
 .obit-publisher{font-size:30px;font-weight:700;color:#111;position:absolute;bottom:22px;left:56px}
 .obit-closing{font-size:38px;font-weight:400;line-height:1.3;color:#111;margin-top:0;white-space:pre-wrap;width:100%;overflow:hidden}
-.line-wrap{position:relative;width:100%}
-.obit-name-row{position:relative}
-.line-fontctrl{position:absolute;top:-13px;left:50%;transform:translateX(-50%);display:flex;gap:3px;z-index:30;direction:ltr}
-.line-fontctrl button{width:22px;height:22px;line-height:20px;padding:0;font-size:14px;font-weight:700;border:1px solid #999;border-radius:5px;background:#fff;color:#333;cursor:pointer;font-family:'Heebo',sans-serif;box-shadow:0 1px 3px rgba(0,0,0,.2)}
-.line-fontctrl button:hover{background:#eee}
-.line-fontctrl button:active{background:#ddd}
+.field-fontctrl{display:inline-flex;gap:3px;direction:ltr;margin-inline-start:8px;vertical-align:middle}
+.field-fontctrl button{width:20px;height:20px;line-height:18px;padding:0;font-size:13px;font-weight:700;border:1px solid #bbb;border-radius:5px;background:#f7f5f0;color:#444;cursor:pointer;font-family:'Heebo',sans-serif}
+.field-fontctrl button:hover{background:#eee}
+.field-fontctrl button:active{background:#ddd}
+.field-label-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:3px}
+.field-label-row label{margin-bottom:0!important}
 .btn-row{display:flex;gap:10px;flex-wrap:wrap;width:840px;justify-content:center;margin:0 auto}
 .btn{flex:1;padding:10px 0;font-family:'Heebo',sans-serif;font-size:13px;font-weight:500;border:1px solid #555;border-radius:var(--radius);background:#fff;color:var(--text);cursor:pointer;transition:background .12s;display:flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap;min-width:140px}
 .btn:hover{background:#f0ede6}
@@ -195,7 +195,7 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
 
   <!-- ═══ TEMPLATE 1 FIELDS: personal obituary ═══ -->
   <div id="tpl-personal-fields">
-  <div class="sec">שורת פתיחה</div>
+  <div class="sec" style="display:flex;align-items:center;justify-content:space-between">שורת פתיחה<span class="field-fontctrl"><button type="button" onclick="lineFontStep('p-opening',-2)" title="הקטן גופן בתצוגה">－</button><button type="button" onclick="lineFontStep('p-opening',2)" title="הגדל גופן בתצוגה">＋</button></span></div>
   <div class="field">
     <select id="opening">
       <option value="ברוך דיין האמת">ברוך דיין האמת</option>
@@ -206,7 +206,7 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
     <input type="text" id="custom-opening" aria-label="שורת פתיחה מותאמת אישית" maxlength="44" placeholder="שורת פתיחה מותאמת...">
   </div>
   <div class="field">
-    <label>שורה שנייה</label>
+    <div class="field-label-row"><label>שורה שנייה</label><span class="field-fontctrl"><button type="button" onclick="lineFontStep('p-sub',-2)" title="הקטן גופן בתצוגה">－</button><button type="button" onclick="lineFontStep('p-sub',2)" title="הגדל גופן בתצוגה">＋</button></span></div>
     <input type="text" id="sub" maxlength="60" placeholder="בצער רב וביגון קודר אנו מודיעים על פטירתו של">
     <div style="font-size:11px;color:var(--muted);margin-top:3px">ברירת מחדל לפי מגדר</div>
   </div>
@@ -228,7 +228,7 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
     <input type="text" id="obit-title" maxlength="30" placeholder="הרב, פרופ׳, הגברת...">
   </div>
   <div class="field">
-    <label>שם הנפטר/ת <span class="req">*</span></label>
+    <div class="field-label-row"><label>שם הנפטר/ת <span class="req">*</span></label><span class="field-fontctrl"><button type="button" onclick="lineFontStep('p-name',-2)" title="הקטן גופן בתצוגה">－</button><button type="button" onclick="lineFontStep('p-name',2)" title="הגדל גופן בתצוגה">＋</button></span></div>
     <input type="text" id="name" maxlength="40" placeholder="שם מלא">
     <div class="err-msg" id="name-err">שדה חובה</div>
   </div>
@@ -239,7 +239,7 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
 
   <div class="sec">פרטי ההלוויה</div>
   <div class="field">
-    <label>תאריך ההלוויה</label>
+    <div class="field-label-row"><label>תאריך ההלוויה</label><span class="field-fontctrl"><button type="button" onclick="lineFontStep('p-funeral',-2)" title="הקטן גופן בתצוגה">－</button><button type="button" onclick="lineFontStep('p-funeral',2)" title="הגדל גופן בתצוגה">＋</button></span></div>
     <button type="button" id="cal-trigger" onclick="openCal()"
       style="width:100%;font-family:'Heebo',sans-serif;font-size:13px;padding:7px 9px;border:1px solid var(--border);border-radius:var(--radius);background:#fafaf8;color:var(--text);direction:rtl;text-align:right;cursor:pointer;">
       📅 בחרו תאריך עברי
@@ -269,7 +269,7 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
     <textarea id="funeral-loc" aria-label="מיקום הלוויה" maxlength="80" placeholder="ניתן להקליד כאן" rows="2" style="resize:none;font-family:inherit;line-height:1.4"></textarea>
   </div>
 
-  <div class="sec">פרטי השבעה</div>
+  <div class="sec" style="display:flex;align-items:center;justify-content:space-between">פרטי השבעה<span class="field-fontctrl"><button type="button" onclick="lineFontStep('p-shiva',-2)" title="הקטן גופן בתצוגה">－</button><button type="button" onclick="lineFontStep('p-shiva',2)" title="הגדל גופן בתצוגה">＋</button></span></div>
   <div class="field">
     <label>ניסוח שורת השבעה</label>
     <select id="shiva-phrase-sel" onchange="handleShivaPhraseChange()">
@@ -313,7 +313,7 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
     <input type="text" id="publisher-text" aria-label="שם המפרסם" maxlength="60" placeholder="ניתן להקליד כאן">
   </div>
 
-  <div class="sec">הערות נוספות</div>
+  <div class="sec" style="display:flex;align-items:center;justify-content:space-between">הערות נוספות<span class="field-fontctrl"><button type="button" onclick="lineFontStep('p-closing',-2)" title="הקטן גופן בתצוגה">－</button><button type="button" onclick="lineFontStep('p-closing',2)" title="הגדל גופן בתצוגה">＋</button></span></div>
   <div class="field">
     <textarea id="closing" aria-label="הערות נוספות" maxlength="200" placeholder="ניתן להקליד כאן" rows="3" style="resize:none;font-family:inherit"></textarea>
     <div style="font-size:10px;color:var(--muted);text-align:left;margin-top:2px">מקסימום שורה אחת</div>
@@ -323,7 +323,7 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
   <!-- ═══ TEMPLATE 2 FIELDS: sympathy / community member's relative ═══ -->
   <div id="tpl-sympathy-fields" style="display:none">
 
-    <div class="sec">שורת פתיחה</div>
+    <div class="sec" style="display:flex;align-items:center;justify-content:space-between">שורת פתיחה<span class="field-fontctrl"><button type="button" onclick="lineFontStep('sp-opening',-2)" title="הקטן גופן בתצוגה">－</button><button type="button" onclick="lineFontStep('sp-opening',2)" title="הגדל גופן בתצוגה">＋</button></span></div>
     <div class="field">
       <select id="sym-opening">
         <option value="ברוך דיין האמת">ברוך דיין האמת</option>
@@ -336,7 +336,7 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
 
     <div class="sec">פרטי החבר/ה</div>
     <div class="field">
-      <label>נוסח ההשתתפות</label>
+      <div class="field-label-row"><label>נוסח ההשתתפות</label><span class="field-fontctrl"><button type="button" onclick="lineFontStep('sp-sub-row,sp-member',-2)" title="הקטן גופן בתצוגה">－</button><button type="button" onclick="lineFontStep('sp-sub-row,sp-member',2)" title="הגדל גופן בתצוגה">＋</button></span></div>
       <select id="sym-solidarity-sel" aria-label="נוסח ההשתתפות" onchange="updateSymSolidarity()">
         <option value="m_single">גבר (יחיד) — משתתפים באבלו של חברנו</option>
         <option value="f_single">אישה (יחידה) — משתתפים באבלה של חברתנו</option>
@@ -357,7 +357,7 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
 
     <div class="sec">קרבה משפחתית</div>
     <div class="field">
-      <label>הנפטר/ת הוא/היא ה...</label>
+      <div class="field-label-row"><label>הנפטר/ת הוא/היא ה...</label><span class="field-fontctrl"><button type="button" onclick="lineFontStep('sp-relation-row',-2)" title="הקטן גופן בתצוגה">－</button><button type="button" onclick="lineFontStep('sp-relation-row',2)" title="הגדל גופן בתצוגה">＋</button></span></div>
       <select id="sym-relation-sel" aria-label="קרבה משפחתית" onchange="handleSymRelationSel()">
         <option value="אביו">אביו</option>
         <option value="אמו">אמו</option>
@@ -380,7 +380,7 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
       <input type="text" id="sym-title" maxlength="30" placeholder='הרב, פרופ׳, הגברת...'>
     </div>
     <div class="field">
-      <label>שם הנפטר/ת <span class="req">*</span></label>
+      <div class="field-label-row"><label>שם הנפטר/ת <span class="req">*</span></label><span class="field-fontctrl"><button type="button" onclick="lineFontStep('sp-deceased',-2)" title="הקטן גופן בתצוגה">－</button><button type="button" onclick="lineFontStep('sp-deceased',2)" title="הגדל גופן בתצוגה">＋</button></span></div>
       <input type="text" id="sym-deceased-name" maxlength="40" placeholder="שם מלא">
       <div class="err-msg" id="sym-deceased-err">שדה חובה</div>
     </div>
@@ -391,7 +391,7 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
 
     <div class="sec">פרטי ההלוויה</div>
     <div class="field">
-      <label>תאריך ההלוויה</label>
+      <div class="field-label-row"><label>תאריך ההלוויה</label><span class="field-fontctrl"><button type="button" onclick="lineFontStep('sp-funeral',-2)" title="הקטן גופן בתצוגה">－</button><button type="button" onclick="lineFontStep('sp-funeral',2)" title="הגדל גופן בתצוגה">＋</button></span></div>
 
       <button type="button" id="sym-cal-trigger" onclick="openSymCal()"
         style="width:100%;font-family:'Heebo',sans-serif;font-size:13px;padding:7px 9px;border:1px solid var(--border);border-radius:var(--radius);background:#fafaf8;color:var(--text);direction:rtl;text-align:right;cursor:pointer;">
@@ -421,7 +421,7 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
       <textarea id="sym-funeral-loc" aria-label="מיקום הלוויה" maxlength="80" placeholder="ניתן להקליד כאן" rows="2" style="resize:none;font-family:inherit;line-height:1.4"></textarea>
     </div>
 
-    <div class="sec">פרטי השבעה</div>
+    <div class="sec" style="display:flex;align-items:center;justify-content:space-between">פרטי השבעה<span class="field-fontctrl"><button type="button" onclick="lineFontStep('sp-shiva',-2)" title="הקטן גופן בתצוגה">－</button><button type="button" onclick="lineFontStep('sp-shiva',2)" title="הגדל גופן בתצוגה">＋</button></span></div>
     <div class="field">
       <label>ניסוח שורת השבעה</label>
       <select id="sym-shiva-phrase-sel" onchange="handleSymShivaPhraseChange()">
@@ -452,7 +452,7 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
       <div style="font-size:10px;color:var(--muted);text-align:left;margin-top:2px">מקסימום שורה אחת</div>
     </div>
 
-    <div class="sec">שורת סיום</div>
+    <div class="sec" style="display:flex;align-items:center;justify-content:space-between">שורת סיום<span class="field-fontctrl"><button type="button" onclick="lineFontStep('sp-closing',-2)" title="הקטן גופן בתצוגה">－</button><button type="button" onclick="lineFontStep('sp-closing',2)" title="הגדל גופן בתצוגה">＋</button></span></div>
     <div class="field">
       <textarea id="sym-closing" aria-label="שורת סיום" maxlength="200" placeholder="ניתן להקליד כאן" rows="3" style="resize:none;font-family:inherit;line-height:1.4"></textarea>
       <div style="font-size:10px;color:var(--muted);text-align:left;margin-top:2px">מקסימום שורה אחת</div>
@@ -463,7 +463,7 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
   <!-- ═══ TEMPLATE 3 FIELDS: resident obituary ═══ -->
   <div id="tpl-resident-fields" style="display:none">
 
-    <div class="sec">שורת פתיחה</div>
+    <div class="sec" style="display:flex;align-items:center;justify-content:space-between">שורת פתיחה<span class="field-fontctrl"><button type="button" onclick="lineFontStep('rp-opening',-2)" title="הקטן גופן בתצוגה">－</button><button type="button" onclick="lineFontStep('rp-opening',2)" title="הגדל גופן בתצוגה">＋</button></span></div>
     <div class="field">
       <select id="res-opening">
         <option value="ברוך דיין האמת">ברוך דיין האמת</option>
@@ -491,7 +491,7 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
       <input type="text" id="res-title" maxlength="30" placeholder='הרב, פרופ׳, הגברת...'>
     </div>
     <div class="field">
-      <label>שם הנפטר/ת <span class="req">*</span></label>
+      <div class="field-label-row"><label>שם הנפטר/ת <span class="req">*</span></label><span class="field-fontctrl"><button type="button" onclick="lineFontStep('rp-deceased',-2)" title="הקטן גופן בתצוגה">－</button><button type="button" onclick="lineFontStep('rp-deceased',2)" title="הגדל גופן בתצוגה">＋</button></span></div>
       <input type="text" id="res-deceased-name" maxlength="40" placeholder="שם מלא">
       <div class="err-msg" id="res-deceased-err">שדה חובה</div>
     </div>
@@ -501,7 +501,7 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
     </div>
 
     <div class="field">
-      <label>שורת ומשתתפת <span style="color:var(--muted);font-weight:400">(אופציונלי)</span></label>
+      <div class="field-label-row"><label>שורת ומשתתפת <span style="color:var(--muted);font-weight:400">(אופציונלי)</span></label><span class="field-fontctrl"><button type="button" onclick="lineFontStep('rp-mourners-row',-2)" title="הקטן גופן בתצוגה">－</button><button type="button" onclick="lineFontStep('rp-mourners-row',2)" title="הגדל גופן בתצוגה">＋</button></span></div>
       <input type="text" id="res-mourners-prefix" aria-label="נוסח ומשתתפת" maxlength="30" value="ומשתתפת באבלה של"
         style="margin-bottom:4px" placeholder="ומשתתפת באבלה של">
       <input type="text" id="res-mourners" aria-label="שם המשפחה האבלה" maxlength="44" placeholder="שם המשפחה / טקסט חופשי">
@@ -509,7 +509,7 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
 
     <div class="sec">פרטי ההלוויה</div>
     <div class="field">
-      <label>תאריך ההלוויה</label>
+      <div class="field-label-row"><label>תאריך ההלוויה</label><span class="field-fontctrl"><button type="button" onclick="lineFontStep('rp-funeral',-2)" title="הקטן גופן בתצוגה">－</button><button type="button" onclick="lineFontStep('rp-funeral',2)" title="הגדל גופן בתצוגה">＋</button></span></div>
 
       <button type="button" id="res-cal-trigger" onclick="openResCal()"
         style="width:100%;font-family:'Heebo',sans-serif;font-size:13px;padding:7px 9px;border:1px solid var(--border);border-radius:var(--radius);background:#fafaf8;color:var(--text);direction:rtl;text-align:right;cursor:pointer;">
@@ -539,7 +539,7 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
       <textarea id="res-funeral-loc" aria-label="מיקום הלוויה" maxlength="80" placeholder="ניתן להקליד כאן" rows="2" style="resize:none;font-family:inherit;line-height:1.4"></textarea>
     </div>
 
-    <div class="sec">פרטי השבעה</div>
+    <div class="sec" style="display:flex;align-items:center;justify-content:space-between">פרטי השבעה<span class="field-fontctrl"><button type="button" onclick="lineFontStep('rp-shiva',-2)" title="הקטן גופן בתצוגה">－</button><button type="button" onclick="lineFontStep('rp-shiva',2)" title="הגדל גופן בתצוגה">＋</button></span></div>
     <div class="field">
       <label>ניסוח שורת השבעה</label>
       <select id="res-shiva-phrase-sel" onchange="handleResShivaPhraseChange()">
@@ -570,7 +570,7 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
       <div style="font-size:10px;color:var(--muted);text-align:left;margin-top:2px">מקסימום שורה אחת</div>
     </div>
 
-    <div class="sec">שורת סיום</div>
+    <div class="sec" style="display:flex;align-items:center;justify-content:space-between">שורת סיום<span class="field-fontctrl"><button type="button" onclick="lineFontStep('rp-closing',-2)" title="הקטן גופן בתצוגה">－</button><button type="button" onclick="lineFontStep('rp-closing',2)" title="הגדל גופן בתצוגה">＋</button></span></div>
     <div class="field">
       <textarea id="res-closing" aria-label="שורת סיום" maxlength="200" placeholder="ניתן להקליד כאן" rows="3" style="resize:none;font-family:inherit;line-height:1.4"></textarea>
       <div style="font-size:10px;color:var(--muted);text-align:left;margin-top:2px">מקסימום שורה אחת</div>
@@ -593,34 +593,32 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
 
       <!-- ═══ TEMPLATE 1: personal obituary ═══ -->
       <div id="tpl1-preview">
-        <div class="line-wrap"><div class="line-fontctrl no-capture"><button type="button" onclick="lineFontStep('p-opening',-2)" aria-label="הקטן גופן" title="הקטן גופן">－</button><button type="button" onclick="lineFontStep('p-opening',2)" aria-label="הגדל גופן" title="הגדל גופן">＋</button></div><div class="obit-opening" id="p-opening">ברוך דיין האמת</div></div>
-        <div class="line-wrap"><div class="line-fontctrl no-capture"><button type="button" onclick="lineFontStep('p-sub',-2)" aria-label="הקטן גופן" title="הקטן גופן">－</button><button type="button" onclick="lineFontStep('p-sub',2)" aria-label="הגדל גופן" title="הגדל גופן">＋</button></div><div class="obit-sub" id="p-sub">בצער רב וביגון קודר אנו מודיעים על פטירתו של</div></div>
+                <div class="obit-opening" id="p-opening">ברוך דיין האמת</div>
+                <div class="obit-sub" id="p-sub">בצער רב וביגון קודר אנו מודיעים על פטירתו של</div>
         <div class="obit-name-row">
-          <div class="line-fontctrl no-capture"><button type="button" onclick="lineFontStep('p-name',-2)" aria-label="הקטן גופן" title="הקטן גופן">－</button><button type="button" onclick="lineFontStep('p-name',2)" aria-label="הגדל גופן" title="הגדל גופן">＋</button></div>
           <span class="obit-inline-title" id="p-title" style="display:none"></span>
           <span class="obit-name" id="p-name">שם הנפטר/ת</span>
           <span class="obit-inline-suffix" id="p-suffix" style="display:none"></span>
         </div>
-        <div class="line-wrap"><div class="line-fontctrl no-capture"><button type="button" onclick="lineFontStep('p-funeral',-2)" aria-label="הקטן גופן" title="הקטן גופן">－</button><button type="button" onclick="lineFontStep('p-funeral',2)" aria-label="הגדל גופן" title="הגדל גופן">＋</button></div><div class="obit-funeral" id="p-funeral" style="display:none"></div></div>
-        <div class="line-wrap"><div class="line-fontctrl no-capture"><button type="button" onclick="lineFontStep('p-shiva',-2)" aria-label="הקטן גופן" title="הקטן גופן">－</button><button type="button" onclick="lineFontStep('p-shiva',2)" aria-label="הגדל גופן" title="הגדל גופן">＋</button></div><div class="obit-shiva-block" id="p-shiva" style="display:none"></div></div>
-        <div class="line-wrap"><div class="line-fontctrl no-capture"><button type="button" onclick="lineFontStep('p-closing',-2)" aria-label="הקטן גופן" title="הקטן גופן">－</button><button type="button" onclick="lineFontStep('p-closing',2)" aria-label="הגדל גופן" title="הגדל גופן">＋</button></div><div class="obit-closing" id="p-closing" style="display:none"></div></div>
+                <div class="obit-funeral" id="p-funeral" style="display:none"></div>
+                <div class="obit-shiva-block" id="p-shiva" style="display:none"></div>
+                <div class="obit-closing" id="p-closing" style="display:none"></div>
     <div class="obit-publisher" id="p-publisher" style="display:none"></div>
       </div>
 
       <!-- ═══ TEMPLATE 2: sympathy notice ═══ -->
       <div id="tpl2-preview" style="display:none">
-        <div class="line-wrap"><div class="line-fontctrl no-capture"><button type="button" onclick="lineFontStep('sp-opening',-2)" aria-label="הקטן גופן" title="הקטן גופן">－</button><button type="button" onclick="lineFontStep('sp-opening',2)" aria-label="הגדל גופן" title="הגדל גופן">＋</button></div><div class="obit-opening" id="sp-opening">ברוך דיין האמת</div></div>
-        <div class="line-wrap"><div class="line-fontctrl no-capture"><button type="button" onclick="lineFontStep('sp-sub-row,sp-member',-2)" aria-label="הקטן גופן" title="הקטן גופן">－</button><button type="button" onclick="lineFontStep('sp-sub-row,sp-member',2)" aria-label="הגדל גופן" title="הגדל גופן">＋</button></div><div class="obit-sub" id="sp-sub-row" style="font-weight:700"><span id="sp-solidarity-phrase">משתתפים באבלו של חברנו</span> <span class="obit-inline-name" id="sp-member">שם החבר</span></div></div>
-        <div class="line-wrap"><div class="line-fontctrl no-capture"><button type="button" onclick="lineFontStep('sp-relation-row',-2)" aria-label="הקטן גופן" title="הקטן גופן">－</button><button type="button" onclick="lineFontStep('sp-relation-row',2)" aria-label="הגדל גופן" title="הגדל גופן">＋</button></div><div class="obit-sub" id="sp-relation-row" style="font-weight:400">בפטירת <span id="sp-relation">אביו/אמו</span></div></div>
+                <div class="obit-opening" id="sp-opening">ברוך דיין האמת</div>
+                <div class="obit-sub" id="sp-sub-row" style="font-weight:700"><span id="sp-solidarity-phrase">משתתפים באבלו של חברנו</span> <span class="obit-inline-name" id="sp-member">שם החבר</span></div>
+                <div class="obit-sub" id="sp-relation-row" style="font-weight:400">בפטירת <span id="sp-relation">אביו/אמו</span></div>
         <div class="obit-name-row">
-          <div class="line-fontctrl no-capture"><button type="button" onclick="lineFontStep('sp-deceased',-2)" aria-label="הקטן גופן" title="הקטן גופן">－</button><button type="button" onclick="lineFontStep('sp-deceased',2)" aria-label="הגדל גופן" title="הגדל גופן">＋</button></div>
           <span class="obit-inline-title" id="sp-title" style="display:none"></span>
           <span class="obit-name" id="sp-deceased">שם הנפטר/ת</span>
           <span class="obit-inline-suffix" id="sp-suffix" style="display:none"></span>
         </div>
-        <div class="line-wrap"><div class="line-fontctrl no-capture"><button type="button" onclick="lineFontStep('sp-funeral',-2)" aria-label="הקטן גופן" title="הקטן גופן">－</button><button type="button" onclick="lineFontStep('sp-funeral',2)" aria-label="הגדל גופן" title="הגדל גופן">＋</button></div><div class="obit-funeral" id="sp-funeral" style="display:none"></div></div>
-        <div class="line-wrap"><div class="line-fontctrl no-capture"><button type="button" onclick="lineFontStep('sp-shiva',-2)" aria-label="הקטן גופן" title="הקטן גופן">－</button><button type="button" onclick="lineFontStep('sp-shiva',2)" aria-label="הגדל גופן" title="הגדל גופן">＋</button></div><div class="obit-shiva-block" id="sp-shiva" style="display:none"></div></div>
-        <div class="line-wrap"><div class="line-fontctrl no-capture"><button type="button" onclick="lineFontStep('sp-closing',-2)" aria-label="הקטן גופן" title="הקטן גופן">－</button><button type="button" onclick="lineFontStep('sp-closing',2)" aria-label="הגדל גופן" title="הגדל גופן">＋</button></div><div class="obit-closing" id="sp-closing" style="display:none"></div></div>
+                <div class="obit-funeral" id="sp-funeral" style="display:none"></div>
+                <div class="obit-shiva-block" id="sp-shiva" style="display:none"></div>
+                <div class="obit-closing" id="sp-closing" style="display:none"></div>
         <div class="obit-footer-row" id="sp-footer">
           <span id="sp-foot-r" style="display:block;text-align:right">תושבי בית אל</span>
           <span id="sp-foot-c" style="display:block;text-align:center">תנצב"ה</span>
@@ -630,18 +628,17 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
 
       <!-- ═══ TEMPLATE 3: resident obituary ═══ -->
       <div id="tpl3-preview" style="display:none">
-        <div class="line-wrap"><div class="line-fontctrl no-capture"><button type="button" onclick="lineFontStep('rp-opening',-2)" aria-label="הקטן גופן" title="הקטן גופן">－</button><button type="button" onclick="lineFontStep('rp-opening',2)" aria-label="הגדל גופן" title="הגדל גופן">＋</button></div><div class="obit-opening" id="rp-opening">ברוך דיין האמת</div></div>
-        <div class="line-wrap"><div class="line-fontctrl no-capture"><button type="button" onclick="lineFontStep('rp-sub',-2)" aria-label="הקטן גופן" title="הקטן גופן">－</button><button type="button" onclick="lineFontStep('rp-sub',2)" aria-label="הגדל גופן" title="הגדל גופן">＋</button></div><div class="obit-sub" id="rp-sub" style="font-weight:700">משפחת בית אל אבלה בפטירתו של</div></div>
+                <div class="obit-opening" id="rp-opening">ברוך דיין האמת</div>
+                <div class="obit-sub" id="rp-sub" style="font-weight:700">משפחת בית אל אבלה בפטירתו של</div>
         <div class="obit-name-row">
-          <div class="line-fontctrl no-capture"><button type="button" onclick="lineFontStep('rp-deceased',-2)" aria-label="הקטן גופן" title="הקטן גופן">－</button><button type="button" onclick="lineFontStep('rp-deceased',2)" aria-label="הגדל גופן" title="הגדל גופן">＋</button></div>
           <span class="obit-inline-title" id="rp-title" style="display:none"></span>
           <span class="obit-name" id="rp-deceased">שם הנפטר/ת</span>
           <span class="obit-inline-suffix" id="rp-suffix" style="display:none"></span>
         </div>
-        <div class="line-wrap" id="rp-mourners-wrap"><div class="line-fontctrl no-capture"><button type="button" onclick="lineFontStep('rp-mourners-row',-2)" aria-label="הקטן גופן" title="הקטן גופן">－</button><button type="button" onclick="lineFontStep('rp-mourners-row',2)" aria-label="הגדל גופן" title="הגדל גופן">＋</button></div><div class="obit-sub" id="rp-mourners-row" style="display:none;font-weight:700"><span id="rp-mourners-prefix">ומשתתפת באבלה של</span> <span id="rp-mourners"></span></div></div>
-        <div class="line-wrap"><div class="line-fontctrl no-capture"><button type="button" onclick="lineFontStep('rp-funeral',-2)" aria-label="הקטן גופן" title="הקטן גופן">－</button><button type="button" onclick="lineFontStep('rp-funeral',2)" aria-label="הגדל גופן" title="הגדל גופן">＋</button></div><div class="obit-funeral" id="rp-funeral" style="display:none"></div></div>
-        <div class="line-wrap"><div class="line-fontctrl no-capture"><button type="button" onclick="lineFontStep('rp-shiva',-2)" aria-label="הקטן גופן" title="הקטן גופן">－</button><button type="button" onclick="lineFontStep('rp-shiva',2)" aria-label="הגדל גופן" title="הגדל גופן">＋</button></div><div class="obit-shiva-block" id="rp-shiva" style="display:none"></div></div>
-        <div class="line-wrap"><div class="line-fontctrl no-capture"><button type="button" onclick="lineFontStep('rp-closing',-2)" aria-label="הקטן גופן" title="הקטן גופן">－</button><button type="button" onclick="lineFontStep('rp-closing',2)" aria-label="הגדל גופן" title="הגדל גופן">＋</button></div><div class="obit-closing" id="rp-closing" style="display:none"></div></div>
+                <div class="obit-sub" id="rp-mourners-row" style="display:none;font-weight:700"><span id="rp-mourners-prefix">ומשתתפת באבלה של</span> <span id="rp-mourners"></span></div>
+                <div class="obit-funeral" id="rp-funeral" style="display:none"></div>
+                <div class="obit-shiva-block" id="rp-shiva" style="display:none"></div>
+                <div class="obit-closing" id="rp-closing" style="display:none"></div>
         <div class="obit-footer-row" id="rp-footer">
           <span id="rp-foot-r" style="display:block;text-align:right">תושבי בית אל</span>
           <span id="rp-foot-c" style="display:block;text-align:center">תנצב"ה</span>
@@ -1800,14 +1797,12 @@ function update(){
 
   }
 
-  syncLineWraps();
   applyLineFontOverrides();
-  setTimeout(function(){syncLineWraps();applyLineFontOverrides();},30);
+  setTimeout(applyLineFontOverrides,30);
 }
 
 // ── PER-LINE FONT SIZE CONTROLS ──
 var LINE_FONT_OVR={};
-var LINE_WRAP_TARGETS=['p-funeral','p-shiva','p-closing','sp-funeral','sp-shiva','sp-closing','rp-funeral','rp-shiva','rp-closing','rp-mourners-row'];
 
 function lineFontStep(idsStr,delta){
   var ids=idsStr.split(',');
@@ -1827,15 +1822,6 @@ function applyLineFontOverrides(){
   Object.keys(LINE_FONT_OVR).forEach(function(id){
     var el=document.getElementById(id);
     if(el)el.style.fontSize=LINE_FONT_OVR[id]+'px';
-  });
-}
-
-function syncLineWraps(){
-  LINE_WRAP_TARGETS.forEach(function(id){
-    var el=document.getElementById(id);
-    if(!el)return;
-    var wrap=el.closest('.line-wrap');
-    if(wrap)wrap.style.display=(el.style.display==='none')?'none':'';
   });
 }
 
