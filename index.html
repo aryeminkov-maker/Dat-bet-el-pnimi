@@ -1151,6 +1151,7 @@ function loadSaved(id){
   if(f['_res_gender']){var r=document.querySelector('input[name="res-gender"][value="'+f['_res_gender']+'"]');if(r)r.checked=true;}
   closeSaved();
   update();
+  setTimeout(distributeSpace,100);
 }
 
 function deleteSaved(id){
@@ -1207,6 +1208,7 @@ function loadFromHash(){
     if(v('res-opening')&&v('res-opening').value==='custom')v('res-custom-field').style.display='';
     history.replaceState(null,'',location.pathname+location.search);
     update();
+    setTimeout(distributeSpace,100);
     return true;
   }catch(e){console.error('loadFromHash error:',e);return false;}
 }
@@ -1266,6 +1268,7 @@ function restoreDraft(){
     if(v('res-opening')&&v('res-opening').value==='custom')v('res-custom-field').style.display='';
     if(v('sym-relation-sel')&&v('sym-relation-sel').value==='custom')v('sym-relation-custom').style.display='';
     update();
+    setTimeout(distributeSpace,100);
   }catch(e){console.error('restoreDraft error:',e);}
 }
 function clearForm(){
@@ -1308,6 +1311,7 @@ function clearForm(){
   resetLineFontOverrides();
   try{localStorage.removeItem(DRAFT_KEY);}catch(e){}
   update();
+  setTimeout(distributeSpace,100);
 }
 
 function openA11y(){document.getElementById('a11y-overlay').classList.add('open');}
@@ -1816,6 +1820,7 @@ function lineFontStep(idsStr,delta){
     LINE_FONT_OVR[id]=next;
   });
   applyLineFontOverrides();
+  setTimeout(distributeSpace,60);
 }
 
 function applyLineFontOverrides(){
