@@ -2320,6 +2320,11 @@ document.addEventListener('DOMContentLoaded',function(){
     if(!localStorage.getItem(DRAFT_KEY))update();
   }
 });
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(e){console.error('SW registration failed:',e);});
+  });
+}
 </script>
 </body>
 </html>

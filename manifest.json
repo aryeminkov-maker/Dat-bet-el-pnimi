@@ -1,0 +1,26 @@
+{
+  "name": "יוצר מודעות אבל — לשימוש פנימי — מחלקת דת בית אל",
+  "short_name": "מודעת אבל (פנימי)",
+  "description": "כלי פנימי ליצירת מודעות אבל — מחלקת דת, מועצה מקומית בית אל",
+  "start_url": "./pnimi.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f5f3ee",
+  "theme_color": "#1a1a1a",
+  "dir": "rtl",
+  "lang": "he",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "1080x1080",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
