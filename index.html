@@ -250,6 +250,7 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
     <div class="field">
       <label>שעה</label>
       <input type="time" id="funeral-time">
+      <label style="font-weight:400;font-size:12px;display:flex;align-items:center;gap:5px;margin-top:6px;cursor:pointer"><input type="checkbox" id="funeral-time-il" style="width:auto">שעון ישראל (להלוויה בחו"ל)</label>
     </div>
     <div class="field" style="display:flex;align-items:flex-end">
       <div class="heb-preview" id="day-preview" style="font-size:14px;padding-bottom:2px"></div>
@@ -402,6 +403,7 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
       <div class="field">
         <label>שעה</label>
         <input type="time" id="sym-funeral-time">
+        <label style="font-weight:400;font-size:12px;display:flex;align-items:center;gap:5px;margin-top:6px;cursor:pointer"><input type="checkbox" id="sym-funeral-time-il" style="width:auto">שעון ישראל (להלוויה בחו"ל)</label>
       </div>
       <div class="field" style="display:flex;align-items:flex-end">
         <div class="heb-preview" id="sym-day-preview" style="font-size:14px;padding-bottom:2px"></div>
@@ -520,6 +522,7 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
       <div class="field">
         <label>שעה</label>
         <input type="time" id="res-funeral-time">
+        <label style="font-weight:400;font-size:12px;display:flex;align-items:center;gap:5px;margin-top:6px;cursor:pointer"><input type="checkbox" id="res-funeral-time-il" style="width:auto">שעון ישראל (להלוויה בחו"ל)</label>
       </div>
       <div class="field" style="display:flex;align-items:flex-end">
         <div class="heb-preview" id="res-day-preview" style="font-size:14px;padding-bottom:2px"></div>
@@ -1631,7 +1634,7 @@ function update(){
     var pastChk=v('funeral-past')&&v('funeral-past').checked;
     var past=pastChk||fd<now;
     var ln=(past?'ההלוויה התקיימה ב':'הלוויה תתקיים ב')+fmtWD(fDate)+', '+fmtHD(fDate);
-    if(fTime)ln+=', בשעה '+fTime;
+    if(fTime){ln+=', בשעה '+fTime;if(v('funeral-time-il')&&v('funeral-time-il').checked)ln+=' (שעון ישראל)';}
     fl.push(ln);}
   if(fLoc)fl.push(fLoc);
   showLines('p-funeral','obit-funeral-line',fl);
@@ -1701,7 +1704,7 @@ function update(){
       var resPastChk=v('res-funeral-past')&&v('res-funeral-past').checked;
       var past3=resPastChk||fd3<now3;
       var ln3=(past3?'ההלוויה התקיימה ב':'הלוויה תתקיים ב')+fmtWD(resFDate)+', '+fmtHD(resFDate);
-      if(resFTime)ln3+=', בשעה '+resFTime;
+      if(resFTime){ln3+=', בשעה '+resFTime;if(v('res-funeral-time-il')&&v('res-funeral-time-il').checked)ln3+=' (שעון ישראל)';}
       resFl.push(ln3);}
     if(resLoc)resFl.push(resLoc);
     showLines('rp-funeral','obit-funeral-line',resFl);
@@ -1774,7 +1777,7 @@ function update(){
       var symPastChk=v('sym-funeral-past')&&v('sym-funeral-past').checked;
       var past2=symPastChk||fd2<now2;
       var ln2=(past2?'ההלוויה התקיימה ב':'הלוויה תתקיים ב')+fmtWD(symFDate)+', '+fmtHD(symFDate);
-      if(symFTime)ln2+=', בשעה '+symFTime;
+      if(symFTime){ln2+=', בשעה '+symFTime;if(v('sym-funeral-time-il')&&v('sym-funeral-time-il').checked)ln2+=' (שעון ישראל)';}
       symFl.push(ln2);}
     if(symLoc)symFl.push(symLoc);
     showLines('sp-funeral','obit-funeral-line',symFl);
@@ -2221,75 +2224,82 @@ function submitContact(){
 
 // ── SHARE NOTICE AS TEXT ──
 function buildNoticeText(){
-  var lines=[];
-  function addText(id){
+  var sections=[];
+  function textOf(id){
     var el=document.getElementById(id);
-    if(el&&el.style.display!=='none'&&el.textContent.trim())lines.push(el.textContent.trim());
+    return(el&&el.style.display!=='none'&&el.textContent.trim())?el.textContent.trim():'';
   }
-  function addCombined(ids){
+  function combinedOf(ids){
     var parts=[];
-    ids.forEach(function(id){
-      var el=document.getElementById(id);
-      if(el&&el.style.display!=='none'&&el.textContent.trim())parts.push(el.textContent.trim());
-    });
-    if(parts.length)lines.push(parts.join(' '));
+    ids.forEach(function(id){var t=textOf(id);if(t)parts.push(t);});
+    return parts.join(' ');
   }
-  function addMultiline(id,lineClass){
-    var el=document.getElementById(id);
+  function multilineOf(id,lineClass){
+    var el=document.getElementById(id),out=[];
     if(el&&el.style.display!=='none'){
       el.querySelectorAll('.'+lineClass).forEach(function(l){
-        if(l.textContent.trim())lines.push(l.textContent.trim());
+        if(l.textContent.trim())out.push(l.textContent.trim());
       });
     }
+    return out;
   }
+  function pushSection(linesArr){
+    var clean=linesArr.filter(function(l){return l&&l.trim();});
+    if(clean.length)sections.push(clean.join('\n'));
+  }
+
   if(ACTIVE_TPL==='personal'){
-    addText('p-opening');
-    addText('p-sub');
-    addCombined(['p-title','p-name','p-suffix']);
-    addMultiline('p-funeral','obit-funeral-line');
-    addMultiline('p-shiva','obit-shiva-line');
-    addText('p-closing');
+    pushSection([textOf('p-opening')]);
+    pushSection([textOf('p-sub'),combinedOf(['p-title','p-name','p-suffix'])]);
+    pushSection(multilineOf('p-funeral','obit-funeral-line'));
+    pushSection(multilineOf('p-shiva','obit-shiva-line'));
+    pushSection([textOf('p-closing')]);
   } else if(ACTIVE_TPL==='sympathy'){
-    addText('sp-opening');
-    addCombined(['sp-solidarity-phrase','sp-member']);
-    addText('sp-relation-row');
-    addCombined(['sp-title','sp-deceased','sp-suffix']);
-    addMultiline('sp-funeral','obit-funeral-line');
-    addMultiline('sp-shiva','obit-shiva-line');
-    addText('sp-closing');
-    lines.push('תושבי בית אל');
-    lines.push('תנצב"ה');
-    lines.push('מועצה מקומית בית אל');
+    pushSection([textOf('sp-opening')]);
+    pushSection([combinedOf(['sp-solidarity-phrase','sp-member']),textOf('sp-relation-row'),combinedOf(['sp-title','sp-deceased','sp-suffix'])]);
+    pushSection(multilineOf('sp-funeral','obit-funeral-line'));
+    pushSection(multilineOf('sp-shiva','obit-shiva-line'));
+    pushSection([textOf('sp-closing')]);
+    pushSection(['תושבי בית אל','תנצב"ה','מועצה מקומית בית אל']);
   } else if(ACTIVE_TPL==='resident'){
-    addText('rp-opening');
-    addText('rp-sub');
-    addCombined(['rp-title','rp-deceased','rp-suffix']);
-    addText('rp-mourners-row');
-    addMultiline('rp-funeral','obit-funeral-line');
-    addMultiline('rp-shiva','obit-shiva-line');
-    addText('rp-closing');
-    lines.push('תושבי בית אל');
-    lines.push('תנצב"ה');
-    lines.push('מועצה מקומית בית אל');
+    pushSection([textOf('rp-opening')]);
+    pushSection([textOf('rp-sub'),combinedOf(['rp-title','rp-deceased','rp-suffix']),textOf('rp-mourners-row')]);
+    pushSection(multilineOf('rp-funeral','obit-funeral-line'));
+    pushSection(multilineOf('rp-shiva','obit-shiva-line'));
+    pushSection([textOf('rp-closing')]);
+    pushSection(['תושבי בית אל','תנצב"ה','מועצה מקומית בית אל']);
   }
-  return lines.join('\n');
+  return sections.join('\n\n');
 }
 
 function shareAsText(){
   if(!validate())return;
   var text=buildNoticeText();
   if(!text.trim()){alert('אין תוכן לשיתוף — יש למלא את פרטי המודעה');return;}
-  if(navigator.share){
-    navigator.share({text:text}).catch(function(){});
-  } else if(navigator.clipboard&&navigator.clipboard.writeText){
+  if(navigator.clipboard&&navigator.clipboard.writeText){
     navigator.clipboard.writeText(text).then(function(){
-      alert('טקסט המודעה הועתק ללוח — כעת ניתן להדביק אותו בכל אפליקציה');
+      alert('טקסט המודעה הועתק ללוח — כעת ניתן להדביק אותו בכל אפליקציה (וואטסאפ, מייל וכו׳)');
     }).catch(function(){
-      window.prompt('העתיקו את טקסט המודעה:',text);
+      copyFallback(text);
     });
   } else {
-    window.prompt('העתיקו את טקסט המודעה:',text);
+    copyFallback(text);
   }
+}
+
+function copyFallback(text){
+  try{
+    var ta=document.createElement('textarea');
+    ta.value=text;
+    ta.style.position='fixed';
+    ta.style.top='-9999px';
+    document.body.appendChild(ta);
+    ta.focus();ta.select();
+    var ok=document.execCommand('copy');
+    document.body.removeChild(ta);
+    if(ok){alert('טקסט המודעה הועתק ללוח — כעת ניתן להדביק אותו בכל אפליקציה (וואטסאפ, מייל וכו׳)');return;}
+  }catch(e){}
+  window.prompt('העתיקו את טקסט המודעה (Ctrl+C / החזקה ולחיצה על העתק):',text);
 }
 
 // ── INIT ──
