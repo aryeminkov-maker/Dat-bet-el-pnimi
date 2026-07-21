@@ -72,7 +72,7 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
 .btn.notify{background:#1a5c2a;color:#fff;border-color:#1a5c2a}
 .btn.notify:hover{background:#256b33}
 .btn:disabled{opacity:.5;cursor:not-allowed}
-.zoom-controls{display:flex;gap:6px;margin-bottom:8px;background:#fff;border-radius:8px;padding:5px;box-shadow:0 1px 4px rgba(0,0,0,.15)}
+.zoom-controls{display:flex;gap:6px;margin-bottom:8px;background:#fff;border-radius:8px;padding:5px;box-shadow:0 1px 4px rgba(0,0,0,.15);position:relative;z-index:2;flex-shrink:0}
 .zoom-btn{width:32px;height:32px;border:1px solid #ccc;border-radius:6px;background:#fafaf8;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#333}
 .zoom-btn:hover{background:#eee}
 .date-mode-toggle{display:flex;gap:0;margin-bottom:6px;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
@@ -199,7 +199,7 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
   </div>
   <div class="field" id="funeral-manual-field" style="display:none">
     <label>עריכה ידנית של שורת ההלוויה</label>
-    <input type="text" id="funeral-manual" maxlength="80" placeholder="לדוגמה: ההלוויה תתקיים ביום ג׳ כ״א תמוז בשעה 14:00" aria-label="עריכה ידנית של שורת ההלוויה">
+    <textarea id="funeral-manual" placeholder="לדוגמה: ההלוויה תתקיים ביום ג׳ כ״א תמוז בשעה 14:00" aria-label="עריכה ידנית של שורת ההלוויה" rows="2" style="resize:none;font-family:inherit;line-height:1.4"></textarea>
     <div style="font-size:11px;color:var(--muted);margin-top:3px">כאשר שורה זו מלאה — היא תחליף את שורת ההלוויה האוטומטית</div>
   </div>
   <div class="field">
@@ -247,12 +247,12 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
   </div>
   <div class="field">
     <label>זמני ניחום</label>
-    <input type="text" id="shiva-hours" maxlength="80" placeholder="ניתן להקליד כאן">
+    <textarea id="shiva-hours" placeholder="ניתן להקליד כאן" rows="2" style="resize:none;font-family:inherit;line-height:1.4"></textarea>
     <div style="font-size:10px;color:var(--muted);text-align:left;margin-top:2px">מקסימום שורה אחת</div>
   </div>
   <div class="field">
     <label>זמני תפילות</label>
-    <input type="text" id="shiva-prayers" maxlength="80" placeholder="ניתן להקליד כאן">
+    <textarea id="shiva-prayers" placeholder="ניתן להקליד כאן" rows="2" style="resize:none;font-family:inherit;line-height:1.4"></textarea>
     <div style="font-size:10px;color:var(--muted);text-align:left;margin-top:2px">מקסימום שורה אחת</div>
   </div>
 
@@ -359,7 +359,7 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
     </div>
     <div class="field" id="sym-funeral-manual-field" style="display:none">
       <label>עריכה ידנית של שורת ההלוויה</label>
-      <input type="text" id="sym-funeral-manual" maxlength="80" placeholder="לדוגמה: ההלוויה תתקיים ביום ג׳ כ״א תמוז בשעה 14:00" aria-label="עריכה ידנית של שורת ההלוויה">
+      <textarea id="sym-funeral-manual" placeholder="לדוגמה: ההלוויה תתקיים ביום ג׳ כ״א תמוז בשעה 14:00" aria-label="עריכה ידנית של שורת ההלוויה" rows="2" style="resize:none;font-family:inherit;line-height:1.4"></textarea>
       <div style="font-size:11px;color:var(--muted);margin-top:3px">כאשר שורה זו מלאה — היא תחליף את שורת ההלוויה האוטומטית</div>
     </div>
     <div class="field">
@@ -408,12 +408,12 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
     </div>
     <div class="field">
       <label>זמני ניחום</label>
-      <input type="text" id="sym-shiva-hours" maxlength="80" placeholder="ניתן להקליד כאן">
+      <textarea id="sym-shiva-hours" placeholder="ניתן להקליד כאן" rows="2" style="resize:none;font-family:inherit;line-height:1.4"></textarea>
       <div style="font-size:10px;color:var(--muted);text-align:left;margin-top:2px">מקסימום שורה אחת</div>
     </div>
     <div class="field">
       <label>זמני תפילות</label>
-      <input type="text" id="sym-shiva-prayers" maxlength="80" placeholder="ניתן להקליד כאן">
+      <textarea id="sym-shiva-prayers" placeholder="ניתן להקליד כאן" rows="2" style="resize:none;font-family:inherit;line-height:1.4"></textarea>
       <div style="font-size:10px;color:var(--muted);text-align:left;margin-top:2px">מקסימום שורה אחת</div>
     </div>
 
@@ -485,7 +485,7 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
     </div>
     <div class="field" id="res-funeral-manual-field" style="display:none">
       <label>עריכה ידנית של שורת ההלוויה</label>
-      <input type="text" id="res-funeral-manual" maxlength="80" placeholder="לדוגמה: ההלוויה תתקיים ביום ג׳ כ״א תמוז בשעה 14:00" aria-label="עריכה ידנית של שורת ההלוויה">
+      <textarea id="res-funeral-manual" placeholder="לדוגמה: ההלוויה תתקיים ביום ג׳ כ״א תמוז בשעה 14:00" aria-label="עריכה ידנית של שורת ההלוויה" rows="2" style="resize:none;font-family:inherit;line-height:1.4"></textarea>
       <div style="font-size:11px;color:var(--muted);margin-top:3px">כאשר שורה זו מלאה — היא תחליף את שורת ההלוויה האוטומטית</div>
     </div>
     <div class="field">
@@ -534,12 +534,12 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
     </div>
     <div class="field">
       <label>זמני ניחום</label>
-      <input type="text" id="res-shiva-hours" maxlength="80" placeholder="ניתן להקליד כאן">
+      <textarea id="res-shiva-hours" placeholder="ניתן להקליד כאן" rows="2" style="resize:none;font-family:inherit;line-height:1.4"></textarea>
       <div style="font-size:10px;color:var(--muted);text-align:left;margin-top:2px">מקסימום שורה אחת</div>
     </div>
     <div class="field">
       <label>זמני תפילות</label>
-      <input type="text" id="res-shiva-prayers" maxlength="80" placeholder="ניתן להקליד כאן">
+      <textarea id="res-shiva-prayers" placeholder="ניתן להקליד כאן" rows="2" style="resize:none;font-family:inherit;line-height:1.4"></textarea>
       <div style="font-size:10px;color:var(--muted);text-align:left;margin-top:2px">מקסימום שורה אחת</div>
     </div>
 
