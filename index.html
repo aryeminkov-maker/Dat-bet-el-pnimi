@@ -197,6 +197,14 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
     <input type="hidden" id="funeral-date">
     <div class="heb-preview" id="heb-preview"></div>
   </div>
+  <div class="field" id="funeral-manual-field" style="display:none">
+    <label>עריכה ידנית של שורת ההלוויה</label>
+    <input type="text" id="funeral-manual" maxlength="80" placeholder="לדוגמה: ההלוויה תתקיים ביום ג׳ כ״א תמוז בשעה 14:00" aria-label="עריכה ידנית של שורת ההלוויה">
+    <div style="font-size:11px;color:var(--muted);margin-top:3px">כאשר שורה זו מלאה — היא תחליף את שורת ההלוויה האוטומטית</div>
+  </div>
+  <div class="field">
+    <button type="button" onclick="toggleFuneralManual()" id="funeral-manual-btn" style="background:none;border:1px solid #aaa;border-radius:6px;padding:4px 12px;font-family:'Heebo',sans-serif;font-size:12px;color:#555;cursor:pointer">✏️ עריכה ידנית של שורת ההלוויה</button>
+  </div>
   <div class="row2">
     <div class="field">
       <label>שעה</label>
@@ -349,6 +357,14 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
       <input type="hidden" id="sym-funeral-date">
       <div class="heb-preview" id="sym-heb-preview"></div>
     </div>
+    <div class="field" id="sym-funeral-manual-field" style="display:none">
+      <label>עריכה ידנית של שורת ההלוויה</label>
+      <input type="text" id="sym-funeral-manual" maxlength="80" placeholder="לדוגמה: ההלוויה תתקיים ביום ג׳ כ״א תמוז בשעה 14:00" aria-label="עריכה ידנית של שורת ההלוויה">
+      <div style="font-size:11px;color:var(--muted);margin-top:3px">כאשר שורה זו מלאה — היא תחליף את שורת ההלוויה האוטומטית</div>
+    </div>
+    <div class="field">
+      <button type="button" onclick="toggleFuneralManual('sym')" style="background:none;border:1px solid #aaa;border-radius:6px;padding:4px 12px;font-family:'Heebo',sans-serif;font-size:12px;color:#555;cursor:pointer">✏️ עריכה ידנית של שורת ההלוויה</button>
+    </div>
     <div class="row2">
       <div class="field">
         <label>שעה</label>
@@ -466,6 +482,14 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
       </button>
       <input type="hidden" id="res-funeral-date">
       <div class="heb-preview" id="res-heb-preview"></div>
+    </div>
+    <div class="field" id="res-funeral-manual-field" style="display:none">
+      <label>עריכה ידנית של שורת ההלוויה</label>
+      <input type="text" id="res-funeral-manual" maxlength="80" placeholder="לדוגמה: ההלוויה תתקיים ביום ג׳ כ״א תמוז בשעה 14:00" aria-label="עריכה ידנית של שורת ההלוויה">
+      <div style="font-size:11px;color:var(--muted);margin-top:3px">כאשר שורה זו מלאה — היא תחליף את שורת ההלוויה האוטומטית</div>
+    </div>
+    <div class="field">
+      <button type="button" onclick="toggleFuneralManual('res')" style="background:none;border:1px solid #aaa;border-radius:6px;padding:4px 12px;font-family:'Heebo',sans-serif;font-size:12px;color:#555;cursor:pointer">✏️ עריכה ידנית של שורת ההלוויה</button>
     </div>
     <div class="row2">
       <div class="field">
@@ -1134,7 +1158,7 @@ function saveCurrentNotice(){
 
   /* Collect all field values */
   var fields={};
-  ['opening','custom-opening','sub','name','obit-title','suffix','funeral-date','funeral-time','publisher-sel','publisher-text',
+  ['opening','custom-opening','sub','name','obit-title','suffix','funeral-date','funeral-time','funeral-manual','sym-funeral-manual','res-funeral-manual','publisher-sel','publisher-text',
    'funeral-loc','funeral-loc-sel','publisher-sel','publisher-text','shiva-phrase-sel','shiva-phrase-text','shiva-addr','shiva-hours','shiva-prayers','closing',
    'sym-opening','sym-custom-opening','sym-solidarity-sel','sym-solidarity-text','sym-member-name','sym-relation-sel','sym-relation-text',
    'sym-title','sym-deceased-name','sym-suffix','sym-funeral-date','sym-funeral-time',
@@ -1275,7 +1299,7 @@ function restoreDraft(){
 function clearForm(){
   /* Clear all text/time/hidden inputs */
   ['opening','custom-opening','sub','name','obit-title','suffix',
-   'funeral-date','funeral-time','funeral-loc','funeral-loc-sel',
+   'funeral-date','funeral-time','funeral-manual','sym-funeral-manual','res-funeral-manual','funeral-loc','funeral-loc-sel',
    'shiva-phrase-sel','shiva-phrase-text','shiva-addr','shiva-hours','shiva-prayers',
    'publisher-sel','publisher-text','closing',
    'sym-opening','sym-custom-opening','sym-member-name','sym-relation-sel',
@@ -1412,6 +1436,19 @@ function installPWA(){
   if(!deferredPrompt)return;
   deferredPrompt.prompt();
   deferredPrompt.userChoice.then(function(){deferredPrompt=null;});
+}
+
+function toggleFuneralManual(pfx){
+  var fieldId=pfx?pfx+'-funeral-manual-field':'funeral-manual-field';
+  var field=v(fieldId);
+  if(!field)return;
+  var isOpen=field.style.display!=='none';
+  field.style.display=isOpen?'none':'';
+  if(!isOpen){
+    var inp=v(pfx?pfx+'-funeral-manual':'funeral-manual');
+    if(inp)inp.focus();
+  }
+  update();
 }
 
 function openInternal(){document.getElementById('internal-overlay').classList.add('open');}
@@ -1716,6 +1753,8 @@ function update(){
       if(resFTime)ln3+=', בשעה '+resFTime;
       resFl.push(ln3);}
     if(resLoc)resFl.push(resLoc);
+    var resManual=v('res-funeral-manual')?v('res-funeral-manual').value.trim():'';
+    if(resManual)resFl=[resManual];
     showLines('rp-funeral','obit-funeral-line',resFl);
 
     var resSl=[];
@@ -1789,6 +1828,8 @@ function update(){
       if(symFTime)ln2+=', בשעה '+symFTime;
       symFl.push(ln2);}
     if(symLoc)symFl.push(symLoc);
+    var symManual=v('sym-funeral-manual')?v('sym-funeral-manual').value.trim():'';
+    if(symManual)symFl=[symManual];
     showLines('sp-funeral','obit-funeral-line',symFl);
 
     var symSl=[];
@@ -2190,7 +2231,7 @@ function submitContact(){
 // ── INIT ──
 document.addEventListener('DOMContentLoaded',function(){
   ['opening','custom-opening','sub','name','obit-title','suffix',
-   'funeral-date','funeral-time','funeral-loc','funeral-loc-sel',
+   'funeral-date','funeral-time','funeral-manual','sym-funeral-manual','res-funeral-manual','funeral-loc','funeral-loc-sel',
    'shiva-phrase-sel','shiva-phrase-text','shiva-addr','shiva-hours','shiva-prayers','closing',
    'sym-opening','sym-custom-opening','sym-solidarity-sel','sym-solidarity-text','sym-member-name','sym-relation-sel','sym-relation-text',
    'sym-title','sym-deceased-name','sym-suffix','sym-funeral-date','sym-funeral-time',
