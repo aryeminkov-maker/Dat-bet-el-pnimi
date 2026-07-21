@@ -48,7 +48,7 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .err-msg{font-size:11px;color:#c0392b;margin-top:3px;display:none}
 .heb-preview{font-size:12px;color:#1a6b3c;margin-top:3px;min-height:15px;font-family:'David','David Libre','Rubik',sans-serif;font-weight:500}
-.preview-panel{background:#c8c5bc;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:16px;padding:20px;overflow:hidden;overflow-x:hidden}
+.preview-panel{background:#c8c5bc;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:16px;padding:20px;overflow:hidden;overflow-x:clip}
 .obit-scaler{width:1122px;height:793px;transform-origin:top center;display:block;flex-shrink:0}
 .obit{width:1122px;height:793px;background:#fff;border:20px solid #000;font-family:'David','David Libre','Rubik',sans-serif;color:#000;direction:rtl;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;padding:28px 56px 70px;gap:0}
 .obit::after{}
@@ -1248,10 +1248,19 @@ var DRAFT_KEY='obit_form_draft';
 function saveDraft(){
   try{
     var d={tpl:ACTIVE_TPL,fields:{},genders:{}};
-    ["opening", "custom-opening", "sub", "name", "obit-title", "suffix", "funeral-date", "funeral-time", "funeral-loc", "funeral-loc-sel", "shiva-addr", "shiva-hours", "shiva-prayers", "closing", "sym-opening", "sym-custom-opening", "sym-member-name", "sym-relation-sel", "sym-relation-text", "sym-title", "sym-deceased-name", "sym-suffix", "sym-funeral-date", "sym-funeral-time", "sym-funeral-loc", "sym-funeral-loc-sel", "sym-shiva-addr", "sym-shiva-hours", "sym-shiva-prayers", "sym-closing", "res-opening", "res-custom-opening", "res-title", "res-deceased-name", "res-suffix", "res-mourners-prefix", "res-mourners", "res-funeral-date", "res-funeral-time", "res-funeral-loc", "res-funeral-loc-sel", "res-shiva-addr", "res-shiva-hours", "res-shiva-prayers", "res-closing"].forEach(function(id){var el=v(id);if(el)d.fields[id]=el.value;});
+    ["opening", "custom-opening", "sub", "name", "obit-title", "suffix", "funeral-date", "funeral-time", "funeral-loc", "funeral-loc-sel", "shiva-addr", "shiva-hours", "shiva-prayers", "closing", "sym-opening", "sym-custom-opening", "sym-member-name", "sym-relation-sel", "sym-relation-text", "sym-title", "sym-deceased-name", "sym-suffix", "sym-funeral-date", "sym-funeral-time", "sym-funeral-loc", "sym-funeral-loc-sel", "sym-shiva-addr", "sym-shiva-hours", "sym-shiva-prayers", "sym-closing", "res-opening", "res-custom-opening", "res-title", "res-deceased-name", "res-suffix", "res-mourners-prefix", "res-mourners", "res-funeral-date", "res-funeral-time", "res-funeral-loc", "res-funeral-loc-sel", "res-shiva-addr", "res-shiva-hours", "res-shiva-prayers", "res-closing",
+      "shiva-phrase-sel", "shiva-phrase-text",
+      "sym-shiva-phrase-sel", "sym-shiva-phrase-text",
+      "res-shiva-phrase-sel", "res-shiva-phrase-text",
+      "funeral-manual", "sym-funeral-manual", "res-funeral-manual",
+      "publisher-sel", "publisher-text",
+      "sym-solidarity-sel", "sym-solidarity-text"].forEach(function(id){var el=v(id);if(el)d.fields[id]=el.value;});
     d.genders.gender=(document.querySelector('input[name="gender"]:checked')||{}).value||'m';
-    d.genders['sym-gender']=(document.querySelector('input[name="sym-gender"]:checked')||{}).value||'m';
     d.genders['res-gender']=(document.querySelector('input[name="res-gender"]:checked')||{}).value||'m';
+    /* Save checkboxes */
+    ['funeral-past','sym-funeral-past','res-funeral-past'].forEach(function(id){
+      var el=v(id);if(el)d.fields[id]=el.checked?'1':'0';
+    });
     localStorage.setItem(DRAFT_KEY,JSON.stringify(d));
   }catch(e){}
 }
@@ -1286,6 +1295,18 @@ function restoreDraft(){
     /* Also re-open custom opening/relation fields */
     if(v('opening')&&v('opening').value==='custom')v('custom-field').style.display='';
     if(v('publisher-sel')&&v('publisher-sel').value==='custom')v('publisher-custom').style.display='';
+    /* Restore checkboxes */
+    ['funeral-past','sym-funeral-past','res-funeral-past'].forEach(function(id){
+      var el=v(id);if(el&&d.fields&&d.fields[id])el.checked=d.fields[id]==='1';
+    });
+    /* Restore shiva phrase custom fields */
+    ['shiva-phrase-sel','sym-shiva-phrase-sel','res-shiva-phrase-sel'].forEach(function(id){
+      var el=v(id);if(el&&d.fields&&d.fields[id]){el.value=d.fields[id];if(el.value==='custom'){var cid=id.replace('-sel','-custom');var cel=v(cid);if(cel)cel.style.display='';}}
+    });
+    /* Restore manual funeral fields */
+    ['funeral-manual','sym-funeral-manual','res-funeral-manual'].forEach(function(id){
+      var el=v(id);if(el&&d.fields&&d.fields[id]){el.value=d.fields[id];if(d.fields[id].trim()){var fid=id+'-field';var fel=v(fid);if(fel)fel.style.display='';}}
+    });
     if(v('sym-solidarity-sel')&&v('sym-solidarity-sel').value==='custom'){var sc=v('sym-solidarity-custom');if(sc)sc.style.display='';}
     handleLocSel();
     handleSymLocSel();
