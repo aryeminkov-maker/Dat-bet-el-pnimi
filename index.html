@@ -201,11 +201,11 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
     </select>
   </div>
   <div class="field" id="custom-field" style="display:none">
-    <input type="text" id="custom-opening" aria-label="שורת פתיחה מותאמת אישית" maxlength="44" placeholder="שורת פתיחה מותאמת...">
+    <textarea id="custom-opening" aria-label="שורת פתיחה מותאמת אישית" placeholder="שורת פתיחה מותאמת..." rows="1" style="resize:vertical;font-family:inherit;line-height:1.4;min-height:38px"></textarea>
   </div>
   <div class="field">
     <label>שורה שנייה <span class="field-fontctrl"><button type="button" onclick="lineFontStep('p-sub',-2)" title="הקטן גופן בתצוגה">－</button><button type="button" onclick="lineFontStep('p-sub',2)" title="הגדל גופן בתצוגה">＋</button></span></label>
-    <input type="text" id="sub" maxlength="60" placeholder="בצער רב וביגון קודר אנו מודיעים על פטירתו של">
+    <textarea id="sub" placeholder="בצער רב וביגון קודר אנו מודיעים על פטירתו של" rows="1" style="resize:vertical;font-family:inherit;line-height:1.4;min-height:38px"></textarea>
     <div style="font-size:11px;color:var(--muted);margin-top:3px">ברירת מחדל לפי מגדר</div>
   </div>
 
@@ -223,16 +223,16 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
   </div>
   <div class="field">
     <label>תואר / כינוי <span style="color:var(--muted);font-weight:400">(אופציונלי)</span></label>
-    <input type="text" id="obit-title" maxlength="30" placeholder="הרב, פרופ׳, הגברת...">
+    <textarea id="obit-title" placeholder="הרב, פרופ׳, הגברת..." rows="1" style="resize:vertical;font-family:inherit;line-height:1.4;min-height:38px"></textarea>
   </div>
   <div class="field">
     <label>שם הנפטר/ת <span class="req">*</span> <span class="field-fontctrl"><button type="button" onclick="lineFontStep('p-name',-2)" title="הקטן גופן בתצוגה">－</button><button type="button" onclick="lineFontStep('p-name',2)" title="הגדל גופן בתצוגה">＋</button></span></label>
-    <input type="text" id="name" maxlength="40" placeholder="שם מלא">
+    <textarea id="name" placeholder="שם מלא" rows="1" style="resize:vertical;font-family:inherit;line-height:1.4;min-height:38px"></textarea>
     <div class="err-msg" id="name-err">שדה חובה</div>
   </div>
   <div class="field">
     <label>סיומת <span style="color:var(--muted);font-weight:400">(אופציונלי)</span></label>
-    <input type="text" id="suffix" maxlength="20" placeholder='ע"ה / זצ"ל / ז"ל'>
+    <textarea id="suffix" placeholder='ע"ה / זצ"ל / ז"ל' rows="1" style="resize:vertical;font-family:inherit;line-height:1.4;min-height:38px"></textarea>
   </div>
 
   <div class="sec">פרטי ההלוויה</div>
@@ -271,7 +271,7 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
     </select>
   </div>
   <div class="field" id="funeral-loc-custom" style="display:none">
-    <textarea id="funeral-loc" aria-label="מיקום הלוויה" maxlength="80" placeholder="ניתן להקליד כאן" rows="2" style="resize:none;font-family:inherit;line-height:1.4"></textarea>
+    <textarea id="funeral-loc" aria-label="מיקום הלוויה" placeholder="ניתן להקליד כאן" rows="2" style="resize:none;font-family:inherit;line-height:1.4"></textarea>
   </div>
 
   <div class="sec">פרטי השבעה <span class="field-fontctrl"><button type="button" onclick="lineFontStep('p-shiva',-2)" title="הקטן גופן בתצוגה">－</button><button type="button" onclick="lineFontStep('p-shiva',2)" title="הגדל גופן בתצוגה">＋</button></span></div>
@@ -287,11 +287,11 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
     </select>
   </div>
   <div class="field" id="shiva-phrase-custom" style="display:none">
-    <input type="text" id="shiva-phrase-text" maxlength="30" placeholder="ניסוח מותאם...">
+    <textarea id="shiva-phrase-text" placeholder="ניסוח מותאם..." rows="1" style="resize:vertical;font-family:inherit;line-height:1.4;min-height:38px"></textarea>
   </div>
   <div class="field">
     <label>כתובת</label>
-    <textarea id="shiva-addr" maxlength="80" placeholder="ניתן להקליד כאן" rows="2" style="resize:none;font-family:inherit;line-height:1.4"></textarea>
+    <textarea id="shiva-addr" placeholder="ניתן להקליד כאן" rows="2" style="resize:none;font-family:inherit;line-height:1.4"></textarea>
   </div>
   <div class="field">
     <label>זמני ניחום</label>
@@ -313,13 +313,12 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
     </select>
   </div>
   <div class="field" id="publisher-custom" style="display:none">
-    <input type="text" id="publisher-text" aria-label="שם המפרסם" maxlength="60" placeholder="ניתן להקליד כאן">
+    <textarea id="publisher-text" aria-label="שם המפרסם" placeholder="ניתן להקליד כאן" rows="1" style="resize:vertical;font-family:inherit;line-height:1.4;min-height:38px"></textarea>
   </div>
 
   <div class="sec">הערות נוספות <span class="field-fontctrl"><button type="button" onclick="lineFontStep('p-closing',-2)" title="הקטן גופן בתצוגה">－</button><button type="button" onclick="lineFontStep('p-closing',2)" title="הגדל גופן בתצוגה">＋</button></span></div>
   <div class="field">
     <textarea id="closing" aria-label="הערות נוספות" placeholder="ניתן להקליד כאן" rows="3" style="resize:none;font-family:inherit"></textarea>
-    <div style="font-size:10px;color:var(--muted);text-align:left;margin-top:2px">מקסימום שורה אחת</div>
   </div>
   </div><!-- /tpl-personal-fields -->
 
@@ -334,7 +333,7 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
       </select>
     </div>
     <div class="field" id="sym-custom-field" style="display:none">
-      <input type="text" id="sym-custom-opening" aria-label="שורת פתיחה מותאמת" maxlength="44" placeholder="שורת פתיחה מותאמת...">
+      <textarea id="sym-custom-opening" aria-label="שורת פתיחה מותאמת" placeholder="שורת פתיחה מותאמת..." rows="1" style="resize:vertical;font-family:inherit;line-height:1.4;min-height:38px"></textarea>
     </div>
 
     <div class="sec">פרטי החבר/ה</div>
@@ -350,11 +349,11 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
       </select>
     </div>
     <div class="field" id="sym-solidarity-custom" style="display:none">
-      <input type="text" id="sym-solidarity-text" aria-label="נוסח השתתפות מותאם" maxlength="60" placeholder="הקלידו את הנוסח...">
+      <textarea id="sym-solidarity-text" aria-label="נוסח השתתפות מותאם" placeholder="הקלידו את הנוסח..." rows="1" style="resize:vertical;font-family:inherit;line-height:1.4;min-height:38px"></textarea>
     </div>
     <div class="field">
       <label>שם החבר/ה <span class="req">*</span></label>
-      <input type="text" id="sym-member-name" maxlength="40" placeholder="שם מלא">
+      <textarea id="sym-member-name" placeholder="שם מלא" rows="1" style="resize:vertical;font-family:inherit;line-height:1.4;min-height:38px"></textarea>
       <div class="err-msg" id="sym-name-err">שדה חובה</div>
     </div>
 
@@ -374,22 +373,22 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
       </select>
     </div>
     <div class="field" id="sym-relation-custom" style="display:none">
-      <input type="text" id="sym-relation-text" aria-label="קרבה משפחתית מותאמת" maxlength="30" placeholder="ניתן להקליד כאן">
+      <textarea id="sym-relation-text" aria-label="קרבה משפחתית מותאמת" placeholder="ניתן להקליד כאן" rows="1" style="resize:vertical;font-family:inherit;line-height:1.4;min-height:38px"></textarea>
     </div>
 
     <div class="sec">פרטי הנפטר/ת</div>
     <div class="field">
       <label>כינוי/תואר <span style="color:var(--muted);font-weight:400">(אופציונלי)</span></label>
-      <input type="text" id="sym-title" maxlength="30" placeholder='הרב, פרופ׳, הגברת...'>
+      <textarea id="sym-title" placeholder='הרב, פרופ׳, הגברת...' rows="1" style="resize:vertical;font-family:inherit;line-height:1.4;min-height:38px"></textarea>
     </div>
     <div class="field">
       <label>שם הנפטר/ת <span class="req">*</span> <span class="field-fontctrl"><button type="button" onclick="lineFontStep('sp-deceased',-2)" title="הקטן גופן בתצוגה">－</button><button type="button" onclick="lineFontStep('sp-deceased',2)" title="הגדל גופן בתצוגה">＋</button></span></label>
-      <input type="text" id="sym-deceased-name" maxlength="40" placeholder="שם מלא">
+      <textarea id="sym-deceased-name" placeholder="שם מלא" rows="1" style="resize:vertical;font-family:inherit;line-height:1.4;min-height:38px"></textarea>
       <div class="err-msg" id="sym-deceased-err">שדה חובה</div>
     </div>
     <div class="field">
       <label>סיומת <span style="color:var(--muted);font-weight:400">(אופציונלי)</span></label>
-      <input type="text" id="sym-suffix" maxlength="20" placeholder='ע"ה / זצ"ל / ז"ל'>
+      <textarea id="sym-suffix" placeholder='ע"ה / זצ"ל / ז"ל' rows="1" style="resize:vertical;font-family:inherit;line-height:1.4;min-height:38px"></textarea>
     </div>
 
     <div class="sec">פרטי ההלוויה</div>
@@ -428,7 +427,7 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
       </select>
     </div>
     <div class="field" id="sym-funeral-loc-custom" style="display:none">
-      <textarea id="sym-funeral-loc" aria-label="מיקום הלוויה" maxlength="80" placeholder="ניתן להקליד כאן" rows="2" style="resize:none;font-family:inherit;line-height:1.4"></textarea>
+      <textarea id="sym-funeral-loc" aria-label="מיקום הלוויה" placeholder="ניתן להקליד כאן" rows="2" style="resize:none;font-family:inherit;line-height:1.4"></textarea>
     </div>
 
     <div class="sec">פרטי השבעה <span class="field-fontctrl"><button type="button" onclick="lineFontStep('sp-shiva',-2)" title="הקטן גופן בתצוגה">－</button><button type="button" onclick="lineFontStep('sp-shiva',2)" title="הגדל גופן בתצוגה">＋</button></span></div>
@@ -444,12 +443,11 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
       </select>
     </div>
     <div class="field" id="sym-shiva-phrase-custom" style="display:none">
-      <input type="text" id="sym-shiva-phrase-text" maxlength="30" placeholder="ניסוח מותאם...">
+      <textarea id="sym-shiva-phrase-text" placeholder="ניסוח מותאם..." rows="1" style="resize:vertical;font-family:inherit;line-height:1.4;min-height:38px"></textarea>
     </div>
     <div class="field">
       <label>כתובת</label>
-      <textarea id="sym-shiva-addr" maxlength="80" placeholder="ניתן להקליד כאן" rows="2" style="resize:none;font-family:inherit;line-height:1.4"></textarea>
-      <div style="font-size:10px;color:var(--muted);text-align:left;margin-top:2px">מקסימום שורה אחת</div>
+      <textarea id="sym-shiva-addr" placeholder="ניתן להקליד כאן" rows="2" style="resize:none;font-family:inherit;line-height:1.4"></textarea>
     </div>
     <div class="field">
       <label>זמני ניחום</label>
@@ -463,7 +461,6 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
     <div class="sec">שורת סיום <span class="field-fontctrl"><button type="button" onclick="lineFontStep('sp-closing',-2)" title="הקטן גופן בתצוגה">－</button><button type="button" onclick="lineFontStep('sp-closing',2)" title="הגדל גופן בתצוגה">＋</button></span></div>
     <div class="field">
       <textarea id="sym-closing" aria-label="שורת סיום" placeholder="ניתן להקליד כאן" rows="3" style="resize:none;font-family:inherit;line-height:1.4"></textarea>
-      <div style="font-size:10px;color:var(--muted);text-align:left;margin-top:2px">מקסימום שורה אחת</div>
     </div>
 
   </div><!-- /tpl-sympathy-fields -->
@@ -479,7 +476,7 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
       </select>
     </div>
     <div class="field" id="res-custom-field" style="display:none">
-      <input type="text" id="res-custom-opening" aria-label="שורת פתיחה מותאמת" maxlength="44" placeholder="שורת פתיחה מותאמת...">
+      <textarea id="res-custom-opening" aria-label="שורת פתיחה מותאמת" placeholder="שורת פתיחה מותאמת..." rows="1" style="resize:vertical;font-family:inherit;line-height:1.4;min-height:38px"></textarea>
     </div>
 
     <div class="sec">פרטי הנפטר/ת</div>
@@ -496,23 +493,22 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
     </div>
     <div class="field">
       <label>כינוי/תואר <span style="color:var(--muted);font-weight:400">(אופציונלי)</span></label>
-      <input type="text" id="res-title" maxlength="30" placeholder='הרב, פרופ׳, הגברת...'>
+      <textarea id="res-title" placeholder='הרב, פרופ׳, הגברת...' rows="1" style="resize:vertical;font-family:inherit;line-height:1.4;min-height:38px"></textarea>
     </div>
     <div class="field">
       <label>שם הנפטר/ת <span class="req">*</span> <span class="field-fontctrl"><button type="button" onclick="lineFontStep('rp-deceased',-2)" title="הקטן גופן בתצוגה">－</button><button type="button" onclick="lineFontStep('rp-deceased',2)" title="הגדל גופן בתצוגה">＋</button></span></label>
-      <input type="text" id="res-deceased-name" maxlength="40" placeholder="שם מלא">
+      <textarea id="res-deceased-name" placeholder="שם מלא" rows="1" style="resize:vertical;font-family:inherit;line-height:1.4;min-height:38px"></textarea>
       <div class="err-msg" id="res-deceased-err">שדה חובה</div>
     </div>
     <div class="field">
       <label>סיומת <span style="color:var(--muted);font-weight:400">(אופציונלי)</span></label>
-      <input type="text" id="res-suffix" maxlength="20" placeholder='ע"ה / זצ"ל / ז"ל'>
+      <textarea id="res-suffix" placeholder='ע"ה / זצ"ל / ז"ל' rows="1" style="resize:vertical;font-family:inherit;line-height:1.4;min-height:38px"></textarea>
     </div>
 
     <div class="field">
       <label>שורת ומשתתפת <span style="color:var(--muted);font-weight:400">(אופציונלי)</span> <span class="field-fontctrl"><button type="button" onclick="lineFontStep('rp-mourners-row',-2)" title="הקטן גופן בתצוגה">－</button><button type="button" onclick="lineFontStep('rp-mourners-row',2)" title="הגדל גופן בתצוגה">＋</button></span></label>
-      <input type="text" id="res-mourners-prefix" aria-label="נוסח ומשתתפת" maxlength="30" value="ומשתתפת באבלה של"
-        style="margin-bottom:4px" placeholder="ומשתתפת באבלה של">
-      <input type="text" id="res-mourners" aria-label="שם המשפחה האבלה" maxlength="44" placeholder="שם המשפחה / טקסט חופשי">
+      <textarea id="res-mourners-prefix" aria-label="נוסח ומשתתפת" placeholder="ומשתתפת באבלה של" rows="1" style="resize:vertical;font-family:inherit;line-height:1.4;min-height:38px">ומשתתפת באבלה של</textarea>
+      <textarea id="res-mourners" aria-label="שם המשפחה האבלה" placeholder="שם המשפחה / טקסט חופשי" rows="1" style="resize:vertical;font-family:inherit;line-height:1.4;min-height:38px"></textarea>
     </div>
 
     <div class="sec">פרטי ההלוויה</div>
@@ -551,7 +547,7 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
       </select>
     </div>
     <div class="field" id="res-funeral-loc-custom" style="display:none">
-      <textarea id="res-funeral-loc" aria-label="מיקום הלוויה" maxlength="80" placeholder="ניתן להקליד כאן" rows="2" style="resize:none;font-family:inherit;line-height:1.4"></textarea>
+      <textarea id="res-funeral-loc" aria-label="מיקום הלוויה" placeholder="ניתן להקליד כאן" rows="2" style="resize:none;font-family:inherit;line-height:1.4"></textarea>
     </div>
 
     <div class="sec">פרטי השבעה <span class="field-fontctrl"><button type="button" onclick="lineFontStep('rp-shiva',-2)" title="הקטן גופן בתצוגה">－</button><button type="button" onclick="lineFontStep('rp-shiva',2)" title="הגדל גופן בתצוגה">＋</button></span></div>
@@ -567,12 +563,11 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
       </select>
     </div>
     <div class="field" id="res-shiva-phrase-custom" style="display:none">
-      <input type="text" id="res-shiva-phrase-text" maxlength="30" placeholder="ניסוח מותאם...">
+      <textarea id="res-shiva-phrase-text" placeholder="ניסוח מותאם..." rows="1" style="resize:vertical;font-family:inherit;line-height:1.4;min-height:38px"></textarea>
     </div>
     <div class="field">
       <label>כתובת</label>
-      <textarea id="res-shiva-addr" maxlength="80" placeholder="ניתן להקליד כאן" rows="2" style="resize:none;font-family:inherit;line-height:1.4"></textarea>
-      <div style="font-size:10px;color:var(--muted);text-align:left;margin-top:2px">מקסימום שורה אחת</div>
+      <textarea id="res-shiva-addr" placeholder="ניתן להקליד כאן" rows="2" style="resize:none;font-family:inherit;line-height:1.4"></textarea>
     </div>
     <div class="field">
       <label>זמני ניחום</label>
@@ -586,7 +581,6 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
     <div class="sec">שורת סיום <span class="field-fontctrl"><button type="button" onclick="lineFontStep('rp-closing',-2)" title="הקטן גופן בתצוגה">－</button><button type="button" onclick="lineFontStep('rp-closing',2)" title="הגדל גופן בתצוגה">＋</button></span></div>
     <div class="field">
       <textarea id="res-closing" aria-label="שורת סיום" placeholder="ניתן להקליד כאן" rows="3" style="resize:none;font-family:inherit;line-height:1.4"></textarea>
-      <div style="font-size:10px;color:var(--muted);text-align:left;margin-top:2px">מקסימום שורה אחת</div>
     </div>
 
   </div><!-- /tpl-resident-fields -->
@@ -861,12 +855,12 @@ header p{font-size:12px;color:var(--muted);margin-right:auto}
       </p>
       <div class="field">
         <label style="font-size:13px;font-family:'Heebo',sans-serif">שם מלא <span class="req">*</span></label>
-        <input type="text" id="contact-name" aria-label="שם מלא" maxlength="50" placeholder="שמכם המלא">
+        <input type="text" id="contact-name" aria-label="שם מלא" placeholder="שמכם המלא">
         <div class="err-msg" id="contact-name-err">שדה חובה</div>
       </div>
       <div class="field" style="margin-top:10px">
         <label style="font-size:13px;font-family:'Heebo',sans-serif">מספר טלפון <span class="req">*</span></label>
-        <input type="tel" id="contact-phone" aria-label="מספר טלפון" maxlength="15" placeholder="050-0000000">
+        <input type="tel" id="contact-phone" aria-label="מספר טלפון" placeholder="050-0000000">
         <div class="err-msg" id="contact-phone-err">שדה חובה</div>
       </div>
     </div>
@@ -1103,12 +1097,13 @@ function saveCurrentNotice(){
   if(rgEl)fields['_res_gender']=rgEl.value;
 
   var saved=getSaved();
+  var now=new Date();
   saved.unshift({
     id:Date.now(),
     tpl:ACTIVE_TPL,
     tplName:tplNames[ACTIVE_TPL],
     name:name,
-    date:new Date().toLocaleDateString('he-IL'),
+    date:now.toLocaleDateString('he-IL')+' '+now.toLocaleTimeString('he-IL',{hour:'2-digit',minute:'2-digit'}),
     fields:fields
   });
   if(saved.length>50)saved=saved.slice(0,50);
