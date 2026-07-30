@@ -1104,7 +1104,8 @@ function saveCurrentNotice(){
     tplName:tplNames[ACTIVE_TPL],
     name:name,
     date:now.toLocaleDateString('he-IL')+' '+now.toLocaleTimeString('he-IL',{hour:'2-digit',minute:'2-digit'}),
-    fields:fields
+    fields:fields,
+    fontOvr:LINE_FONT_OVR
   });
   if(saved.length>50)saved=saved.slice(0,50);
   setSaved(saved);
@@ -1163,9 +1164,11 @@ function loadSaved(id){
   if(v('shiva-phrase-sel')&&v('shiva-phrase-sel').value==='custom'){var spc=v('shiva-phrase-custom');if(spc)spc.style.display='';}
   if(v('sym-shiva-phrase-sel')&&v('sym-shiva-phrase-sel').value==='custom'){var sspc=v('sym-shiva-phrase-custom');if(sspc)sspc.style.display='';}
   if(v('res-shiva-phrase-sel')&&v('res-shiva-phrase-sel').value==='custom'){var rspc=v('res-shiva-phrase-custom');if(rspc)rspc.style.display='';}
+  LINE_FONT_OVR=(item.fontOvr&&typeof item.fontOvr==='object')?item.fontOvr:{};
   closeSaved();
   update();
   setTimeout(distributeSpace,100);
+  setTimeout(autoGrowAllTextareas,100);
 }
 
 function deleteSaved(id){
@@ -1185,7 +1188,7 @@ function shareSavedNotice(id){
   var saved=getSaved();
   var item=saved.find(function(s){return s.id===id;});
   if(!item)return;
-  var payload={tpl:item.tpl,fields:item.fields};
+  var payload={tpl:item.tpl,fields:item.fields,fontOvr:item.fontOvr||{}};
   var encoded=encodeNoticePayload(payload);
   var url=location.origin+location.pathname+'#load='+encoded;
   if(navigator.share){
@@ -1229,9 +1232,11 @@ function loadFromHash(){
     if(v('shiva-phrase-sel')&&v('shiva-phrase-sel').value==='custom'){var spc=v('shiva-phrase-custom');if(spc)spc.style.display='';}
     if(v('sym-shiva-phrase-sel')&&v('sym-shiva-phrase-sel').value==='custom'){var sspc=v('sym-shiva-phrase-custom');if(sspc)sspc.style.display='';}
     if(v('res-shiva-phrase-sel')&&v('res-shiva-phrase-sel').value==='custom'){var rspc=v('res-shiva-phrase-custom');if(rspc)rspc.style.display='';}
+    LINE_FONT_OVR=(payload.fontOvr&&typeof payload.fontOvr==='object')?payload.fontOvr:{};
     history.replaceState(null,'',location.pathname+location.search);
     update();
     setTimeout(distributeSpace,100);
+    setTimeout(autoGrowAllTextareas,100);
     return true;
   }catch(e){console.error('loadFromHash error:',e);return false;}
 }
@@ -1263,7 +1268,7 @@ var ALL_CHECKBOX_FIELD_IDS=['funeral-past','sym-funeral-past','res-funeral-past'
  'funeral-time-il','sym-funeral-time-il','res-funeral-time-il'];
 function saveDraft(){
   try{
-    var d={tpl:ACTIVE_TPL,fields:{},genders:{},checks:{}};
+    var d={tpl:ACTIVE_TPL,fields:{},genders:{},checks:{},fontOvr:LINE_FONT_OVR};
     ALL_TEXT_FIELD_IDS.forEach(function(id){var el=v(id);if(el)d.fields[id]=el.value;});
     ALL_CHECKBOX_FIELD_IDS.forEach(function(id){var el=v(id);if(el)d.checks[id]=el.checked;});
     d.genders.gender=(document.querySelector('input[name="gender"]:checked')||{}).value||'m';
@@ -1280,6 +1285,7 @@ function restoreDraft(){
     if(d.tpl)setTemplate(d.tpl);
     if(d.fields)Object.keys(d.fields).forEach(function(id){var el=v(id);if(el)el.value=d.fields[id];});
     if(d.checks)Object.keys(d.checks).forEach(function(id){var el=v(id);if(el)el.checked=!!d.checks[id];});
+    LINE_FONT_OVR=(d.fontOvr&&typeof d.fontOvr==='object')?d.fontOvr:{};
     if(d.genders){
       Object.keys(d.genders).forEach(function(name){
         var r=document.querySelector('input[name="'+name+'"][value="'+d.genders[name]+'"]');
@@ -1315,6 +1321,7 @@ function restoreDraft(){
     if(v('res-shiva-phrase-sel')&&v('res-shiva-phrase-sel').value==='custom'){var rspc=v('res-shiva-phrase-custom');if(rspc)rspc.style.display='';}
     update();
     setTimeout(distributeSpace,100);
+    setTimeout(autoGrowAllTextareas,100);
   }catch(e){console.error('restoreDraft error:',e);}
 }
 function clearForm(){
@@ -1358,6 +1365,7 @@ function clearForm(){
   try{localStorage.removeItem(DRAFT_KEY);}catch(e){}
   update();
   setTimeout(distributeSpace,100);
+  setTimeout(autoGrowAllTextareas,100);
 }
 
 function openA11y(){document.getElementById('a11y-overlay').classList.add('open');}
@@ -2383,6 +2391,13 @@ function copyFallback(text){
 }
 
 // ── INIT ──
+function autoGrowTextarea(el){
+  el.style.height='auto';
+  el.style.height=(el.scrollHeight+2)+'px';
+}
+function autoGrowAllTextareas(){
+  document.querySelectorAll('.form-panel textarea').forEach(autoGrowTextarea);
+}
 document.addEventListener('DOMContentLoaded',function(){
   ALL_TEXT_FIELD_IDS.forEach(function(id){
     var el=v(id);if(el){el.addEventListener('input',update);el.addEventListener('change',update);}});
@@ -2391,6 +2406,12 @@ document.addEventListener('DOMContentLoaded',function(){
   document.querySelectorAll('input[name="gender"]').forEach(function(r){r.addEventListener('change',update);});
   document.querySelectorAll('input[name="res-gender"]').forEach(function(r){r.addEventListener('change',update);});
   window.addEventListener('resize',function(){if(!zoomManual)scaleObit();});
+  /* Auto-grow every textarea so line breaks — including blank lines added for layout —
+     are always visible instead of being hidden inside a fixed-height box. */
+  document.querySelectorAll('.form-panel textarea').forEach(function(t){
+    autoGrowTextarea(t);
+    t.addEventListener('input',function(){autoGrowTextarea(t);});
+  });
   /* Auto-distribute space on blur of any field */
   document.addEventListener('blur',function(e){
     var tag=e.target.tagName;
