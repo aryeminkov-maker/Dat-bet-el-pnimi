@@ -1,8 +1,9 @@
 {
+  "id": "/dat-bet-el-pnimi/",
   "name": "יוצר מודעות אבל — לשימוש פנימי — מחלקת דת בית אל",
   "short_name": "מודעת אבל (פנימי)",
   "description": "כלי פנימי ליצירת מודעות אבל — מחלקת דת, מועצה מקומית בית אל",
-  "start_url": "./pnimi.html",
+  "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "background_color": "#f5f3ee",
